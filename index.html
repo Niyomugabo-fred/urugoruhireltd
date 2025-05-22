@@ -6,6 +6,7 @@
     <title>Urugo Ruhire Ltd - Elegant Decoration & Ceremonial Wear</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
     <script>
         tailwind.config = {
             theme: {
@@ -13,14 +14,18 @@
                     colors: {
                         primary: '#8B5CF6',
                         secondary: '#F59E0B',
+                        accent: '#EC4899',
                         dark: '#1F2937',
-                    }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
         }
@@ -28,6 +33,39 @@
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/placeholder.svg?height=800&width=1600');
             background-size: cover;
             background-position: center;
+            height: 90vh;
+            min-height: 600px;
+        }
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
+        .image-card:hover .image-overlay {
+            opacity: 1;
+        }
+        .image-overlay {
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
@@ -36,18 +74,28 @@
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <a href="index.html" class="text-2xl font-bold text-primary">Urugo Ruhire</a>
+                <a href="index.html" class="flex items-center">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-2">
+                        <span class="text-white font-bold text-xl">UR</span>
+                    </div>
+                    <span class="text-2xl font-bold text-primary">Urugo Ruhire</span>
+                </a>
                 
                 <!-- Desktop Navigation -->
                 <nav class="hidden md:flex space-x-6">
-                    <a href="index.html" class="text-dark hover:text-primary font-medium">Home</a>
-                    <a href="about.html" class="text-dark hover:text-primary font-medium">About Us</a>
-                    <a href="services.html" class="text-dark hover:text-primary font-medium">Services</a>
-                    <a href="gallery.html" class="text-dark hover:text-primary font-medium">Gallery</a>
-                    <a href="catalog.html" class="text-dark hover:text-primary font-medium">Catalog</a>
-                    <a href="testimonials.html" class="text-dark hover:text-primary font-medium">Reviews</a>
-                    <a href="contact.html" class="text-dark hover:text-primary font-medium">Contact</a>
+                    <a href="index.html" class="text-dark hover:text-primary font-medium border-b-2 border-primary">Home</a>
+                    <a href="about.html" class="text-dark hover:text-primary font-medium border-b-2 border-transparent hover:border-primary transition-all">About Us</a>
+                    <a href="services.html" class="text-dark hover:text-primary font-medium border-b-2 border-transparent hover:border-primary transition-all">Services</a>
+                    <a href="gallery.html" class="text-dark hover:text-primary font-medium border-b-2 border-transparent hover:border-primary transition-all">Gallery</a>
+                    <a href="catalog.html" class="text-dark hover:text-primary font-medium border-b-2 border-transparent hover:border-primary transition-all">Catalog</a>
+                    <a href="testimonials.html" class="text-dark hover:text-primary font-medium border-b-2 border-transparent hover:border-primary transition-all">Reviews</a>
+                    <a href="contact.html" class="text-dark hover:text-primary font-medium border-b-2 border-transparent hover:border-primary transition-all">Contact</a>
                 </nav>
+                
+                <!-- Book Now Button (Desktop) -->
+                <a href="book.html" class="hidden md:block bg-primary hover:bg-primary/90 text-white font-bold py-2 px-6 rounded-full transition">
+                    Book Now
+                </a>
                 
                 <!-- Mobile Menu Button -->
                 <button id="mobile-menu-button" class="md:hidden text-dark">
@@ -65,120 +113,312 @@
                     <a href="catalog.html" class="text-dark hover:text-primary font-medium">Catalog</a>
                     <a href="testimonials.html" class="text-dark hover:text-primary font-medium">Reviews</a>
                     <a href="contact.html" class="text-dark hover:text-primary font-medium">Contact</a>
+                    <a href="book.html" class="bg-primary hover:bg-primary/90 text-white font-bold py-2 px-6 rounded-full transition text-center mt-2">Book Now</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero-section py-24 md:py-32">
-        <div class="container mx-auto px-4 text-center text-white">
-            <h1 class="text-4xl md:text-6xl font-bold mb-6">We Make Your Day Unforgettable</h1>
-            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Elegant decoration and stylish ceremonial wear for your special occasions</p>
-            <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="book.html" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition">Book Now</a>
-                <a href="catalog.html" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition">View Catalog</a>
-                <a href="contact.html" class="bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-full transition">Contact Us</a>
+    <!-- Hero Section with Slider -->
+    <section class="hero-section flex items-center relative">
+        <!-- Hero Slider -->
+        <div class="swiper hero-swiper absolute inset-0 z-0">
+            <div class="swiper-wrapper">
+                <!-- Replace these with your actual wedding decoration images -->
+                <div class="swiper-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/placeholder.svg?height=800&width=1600'); background-size: cover; background-position: center;"></div>
+                <div class="swiper-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/placeholder.svg?height=800&width=1600'); background-size: cover; background-position: center;"></div>
+                <div class="swiper-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/placeholder.svg?height=800&width=1600'); background-size: cover; background-position: center;"></div>
             </div>
+            <div class="swiper-pagination"></div>
+        </div>
+        
+        <!-- Hero Content -->
+        <div class="container mx-auto px-4 text-center text-white relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">We Make Your Day <span class="text-secondary">Unforgettable</span></h1>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Elegant decoration and stylish ceremonial wear for your special occasions</p>
+                <div class="flex flex-col md:flex-row justify-center gap-4">
+                    <a href="book.html" class="bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">Book Now</a>
+                    <a href="catalog.html" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition transform hover:scale-105">View Catalog</a>
+                    <a href="contact.html" class="bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">Contact Us</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <i class="fas fa-chevron-down text-2xl"></i>
         </div>
     </section>
 
-    <!-- Services Overview -->
-    <section class="py-16 bg-white">
+    <!-- Featured Services with Images -->
+    <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-dark mb-4">Our Services</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">We offer a wide range of decoration and clothing services for all your special occasions.</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Our Premium Services</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">We offer a wide range of decoration and clothing services for all your special occasions.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Decoration Service -->
-                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-magic text-2xl text-primary"></i>
+                <!-- Wedding Decoration Service -->
+                <div class="service-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl">
+                    <div class="h-64 overflow-hidden">
+                        <!-- Replace with wedding decoration image -->
+                        <img src="/placeholder.svg?height=400&width=400" alt="Wedding Decoration" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">Event Decoration</h3>
-                    <p class="text-gray-600 mb-4">Beautiful decoration services for weddings, introductions, birthdays, and corporate events.</p>
-                    <a href="services.html" class="text-primary hover:text-primary/80 font-medium">Learn More →</a>
+                    <div class="p-6 text-center">
+                        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto -mt-14 mb-4 border-4 border-white">
+                            <i class="fas fa-magic text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Wedding Decoration</h3>
+                        <p class="text-gray-600 mb-4">Transform your wedding venue into a magical space with our elegant decoration services.</p>
+                        <a href="services.html" class="text-primary hover:text-primary/80 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- Clothing Service -->
-                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-tshirt text-2xl text-primary"></i>
+                <!-- Traditional Clothing Service -->
+                <div class="service-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl">
+                    <div class="h-64 overflow-hidden">
+                        <!-- Replace with traditional clothing image -->
+                        <img src="/placeholder.svg?height=400&width=400" alt="Traditional Clothing" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">Ceremonial Clothing</h3>
-                    <p class="text-gray-600 mb-4">Traditional and modern outfits for weddings, cultural ceremonies, and special events.</p>
-                    <a href="services.html" class="text-primary hover:text-primary/80 font-medium">Learn More →</a>
+                    <div class="p-6 text-center">
+                        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto -mt-14 mb-4 border-4 border-white">
+                            <i class="fas fa-tshirt text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Traditional Clothing</h3>
+                        <p class="text-gray-600 mb-4">Elegant Imikenyero, Kitenge outfits, and suits for traditional ceremonies.</p>
+                        <a href="services.html" class="text-primary hover:text-primary/80 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- Rent/Buy Option -->
-                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-tags text-2xl text-primary"></i>
+                <!-- Introduction Ceremonies -->
+                <div class="service-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl">
+                    <div class="h-64 overflow-hidden">
+                        <!-- Replace with introduction ceremony image -->
+                        <img src="/placeholder.svg?height=400&width=400" alt="Introduction Ceremonies" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">Rent or Buy</h3>
-                    <p class="text-gray-600 mb-4">Flexible options to rent or purchase our beautiful decorations and clothing items.</p>
-                    <a href="catalog.html" class="text-primary hover:text-primary/80 font-medium">View Options →</a>
+                    <div class="p-6 text-center">
+                        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto -mt-14 mb-4 border-4 border-white">
+                            <i class="fas fa-handshake text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Introduction Ceremonies</h3>
+                        <p class="text-gray-600 mb-4">Beautiful settings that honor tradition while adding a touch of modern elegance.</p>
+                        <a href="services.html" class="text-primary hover:text-primary/80 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
                 </div>
                 
-                <!-- Packages -->
-                <div class="bg-gray-50 rounded-xl p-6 text-center hover:shadow-lg transition">
-                    <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-gift text-2xl text-primary"></i>
+                <!-- Party Decoration -->
+                <div class="service-card bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl">
+                    <div class="h-64 overflow-hidden">
+                        <!-- Replace with party decoration image -->
+                        <img src="/placeholder.svg?height=400&width=400" alt="Party Decoration" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
-                    <h3 class="text-xl font-bold text-dark mb-3">Special Packages</h3>
-                    <p class="text-gray-600 mb-4">Bronze, Silver, and Gold packages for complete decoration and clothing solutions.</p>
-                    <a href="services.html" class="text-primary hover:text-primary/80 font-medium">See Packages →</a>
+                    <div class="p-6 text-center">
+                        <div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto -mt-14 mb-4 border-4 border-white">
+                            <i class="fas fa-birthday-cake text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-dark mb-3">Party Decoration</h3>
+                        <p class="text-gray-600 mb-4">Celebrate in style with our creative party decoration services for birthdays and events.</p>
+                        <a href="services.html" class="text-primary hover:text-primary/80 font-medium inline-flex items-center">
+                            Learn More <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Preview -->
-    <section class="py-16 bg-gray-50">
+    <!-- Featured Work / Gallery Preview with Hover Effects -->
+    <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-dark mb-4">Our Gallery</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">Take a look at some of our beautiful decorations and ceremonial wear from past events.</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Our Beautiful Work</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Take a look at some of our beautiful decorations and ceremonial wear from past events.</p>
             </div>
             
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <img src="/placeholder.svg?height=300&width=300" alt="Gallery Image 1" class="w-full h-64 object-cover rounded-lg hover:opacity-90 transition">
-                <img src="/placeholder.svg?height=300&width=300" alt="Gallery Image 2" class="w-full h-64 object-cover rounded-lg hover:opacity-90 transition">
-                <img src="/placeholder.svg?height=300&width=300" alt="Gallery Image 3" class="w-full h-64 object-cover rounded-lg hover:opacity-90 transition">
-                <img src="/placeholder.svg?height=300&width=300" alt="Gallery Image 4" class="w-full h-64 object-cover rounded-lg hover:opacity-90 transition">
-                <img src="/placeholder.svg?height=300&width=300" alt="Gallery Image 5" class="w-full h-64 object-cover rounded-lg hover:opacity-90 transition hidden md:block">
-                <img src="/placeholder.svg?height=300&width=300" alt="Gallery Image 6" class="w-full h-64 object-cover rounded-lg hover:opacity-90 transition hidden md:block">
-                <img src="/placeholder.svg?height=300&width=300" alt="Gallery Image 7" class="w-full h-64 object-cover rounded-lg hover:opacity-90 transition hidden lg:block">
-                <img src="/placeholder.svg?height=300&width=300" alt="Gallery Image 8" class="w-full h-64 object-cover rounded-lg hover:opacity-90 transition hidden lg:block">
+                <!-- Gallery Image 1 -->
+                <div class="image-card relative rounded-lg overflow-hidden shadow-md group">
+                    <!-- Replace with wedding decoration image -->
+                    <img src="/placeholder.svg?height=400&width=400" alt="Wedding Decoration" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="image-overlay absolute inset-0 bg-primary/70 flex flex-col items-center justify-center p-4">
+                        <h3 class="text-white font-bold text-lg mb-2">Wedding Decoration</h3>
+                        <p class="text-white text-sm text-center">Elegant setup for a traditional wedding ceremony</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 2 -->
+                <div class="image-card relative rounded-lg overflow-hidden shadow-md group">
+                    <!-- Replace with traditional outfit image -->
+                    <img src="/placeholder.svg?height=400&width=400" alt="Traditional Outfit" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="image-overlay absolute inset-0 bg-primary/70 flex flex-col items-center justify-center p-4">
+                        <h3 class="text-white font-bold text-lg mb-2">Traditional Outfit</h3>
+                        <p class="text-white text-sm text-center">Beautiful Imikenyero for bride and groom</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 3 -->
+                <div class="image-card relative rounded-lg overflow-hidden shadow-md group">
+                    <!-- Replace with introduction ceremony image -->
+                    <img src="/placeholder.svg?height=400&width=400" alt="Introduction Ceremony" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="image-overlay absolute inset-0 bg-primary/70 flex flex-col items-center justify-center p-4">
+                        <h3 class="text-white font-bold text-lg mb-2">Introduction Ceremony</h3>
+                        <p class="text-white text-sm text-center">Traditional setup with modern touches</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 4 -->
+                <div class="image-card relative rounded-lg overflow-hidden shadow-md group">
+                    <!-- Replace with party decoration image -->
+                    <img src="/placeholder.svg?height=400&width=400" alt="Birthday Party" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="image-overlay absolute inset-0 bg-primary/70 flex flex-col items-center justify-center p-4">
+                        <h3 class="text-white font-bold text-lg mb-2">Birthday Party</h3>
+                        <p class="text-white text-sm text-center">Colorful decoration for a special celebration</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 5 -->
+                <div class="image-card relative rounded-lg overflow-hidden shadow-md group hidden md:block">
+                    <!-- Replace with corporate event image -->
+                    <img src="/placeholder.svg?height=400&width=400" alt="Corporate Event" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="image-overlay absolute inset-0 bg-primary/70 flex flex-col items-center justify-center p-4">
+                        <h3 class="text-white font-bold text-lg mb-2">Corporate Event</h3>
+                        <p class="text-white text-sm text-center">Professional setup for business gatherings</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 6 -->
+                <div class="image-card relative rounded-lg overflow-hidden shadow-md group hidden md:block">
+                    <!-- Replace with baptism gown image -->
+                    <img src="/placeholder.svg?height=400&width=400" alt="Baptism Gown" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="image-overlay absolute inset-0 bg-primary/70 flex flex-col items-center justify-center p-4">
+                        <h3 class="text-white font-bold text-lg mb-2">Baptism Gown</h3>
+                        <p class="text-white text-sm text-center">Elegant attire for religious ceremonies</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 7 -->
+                <div class="image-card relative rounded-lg overflow-hidden shadow-md group hidden lg:block">
+                    <!-- Replace with party outfit image -->
+                    <img src="/placeholder.svg?height=400&width=400" alt="Party Outfit" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="image-overlay absolute inset-0 bg-primary/70 flex flex-col items-center justify-center p-4">
+                        <h3 class="text-white font-bold text-lg mb-2">Party Outfit</h3>
+                        <p class="text-white text-sm text-center">Stylish attire for special celebrations</p>
+                    </div>
+                </div>
+                
+                <!-- Gallery Image 8 -->
+                <div class="image-card relative rounded-lg overflow-hidden shadow-md group hidden lg:block">
+                    <!-- Replace with children's wear image -->
+                    <img src="/placeholder.svg?height=400&width=400" alt="Children's Wear" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="image-overlay absolute inset-0 bg-primary/70 flex flex-col items-center justify-center p-4">
+                        <h3 class="text-white font-bold text-lg mb-2">Children's Wear</h3>
+                        <p class="text-white text-sm text-center">Adorable outfits for little ones</p>
+                    </div>
+                </div>
             </div>
             
-            <div class="text-center mt-8">
-                <a href="gallery.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition">View Full Gallery</a>
+            <div class="text-center mt-10">
+                <a href="gallery.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
+                    View Full Gallery <i class="fas fa-images ml-2"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="py-16 bg-white">
+    <!-- Why Choose Us with Images -->
+    <section class="py-20 bg-white">
         <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-dark mb-4">Client Reviews</h2>
-                <p class="text-gray-600 max-w-2xl mx-auto">See what our clients have to say about our services.</p>
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Why Choose Us</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">We're committed to making your special day truly unforgettable.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <!-- Replace with team working image -->
+                    <img src="/placeholder.svg?height=600&width=800" alt="Our Team at Work" class="rounded-xl shadow-lg w-full">
+                </div>
+                <div>
+                    <div class="space-y-8">
+                        <!-- Feature 1 -->
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-star text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">Experienced Team</h3>
+                                <p class="text-gray-600">Our team has over 10 years of experience in event decoration and ceremonial clothing, ensuring professional service.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 2 -->
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-heart text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">Attention to Detail</h3>
+                                <p class="text-gray-600">We pay close attention to every detail, ensuring that your event is perfectly decorated and your attire fits flawlessly.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 3 -->
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-palette text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">Customized Solutions</h3>
+                                <p class="text-gray-600">We tailor our services to match your vision, style, and budget, creating a unique experience for your special day.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Feature 4 -->
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-handshake text-primary"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-dark mb-2">Flexible Options</h3>
+                                <p class="text-gray-600">With our rent or buy options and various packages, we provide flexible solutions to meet your specific needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials with Images -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">What Our Clients Say</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">See what our clients have to say about our services.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Testimonial 1 -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-6">
+                        <!-- Replace with client photo -->
+                        <div class="w-16 h-16 bg-gray-300 rounded-full mr-4 overflow-hidden">
+                            <img src="/placeholder.svg?height=100&width=100" alt="Marie Uwase" class="w-full h-full object-cover">
+                        </div>
                         <div>
-                            <h4 class="font-bold text-dark">Marie Uwase</h4>
+                            <h4 class="font-bold text-dark text-lg">Marie Uwase</h4>
                             <p class="text-gray-500 text-sm">Wedding Client</p>
                         </div>
                     </div>
-                    <div class="text-yellow-400 mb-3">
+                    <div class="text-yellow-400 mb-4">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -186,18 +426,25 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <p class="text-gray-600 italic">"Urugo Ruhire made our wedding day absolutely magical! The decorations were stunning and exactly what we envisioned. The team was professional and attentive to every detail."</p>
+                    <!-- Replace with wedding decoration image -->
+                    <div class="mt-4 h-40 rounded-lg overflow-hidden">
+                        <img src="/placeholder.svg?height=200&width=400" alt="Wedding Decoration" class="w-full h-full object-cover">
+                    </div>
                 </div>
                 
                 <!-- Testimonial 2 -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-6">
+                        <!-- Replace with client photo -->
+                        <div class="w-16 h-16 bg-gray-300 rounded-full mr-4 overflow-hidden">
+                            <img src="/placeholder.svg?height=100&width=100" alt="Jean Pierre Mugabo" class="w-full h-full object-cover">
+                        </div>
                         <div>
-                            <h4 class="font-bold text-dark">Jean Pierre Mugabo</h4>
+                            <h4 class="font-bold text-dark text-lg">Jean Pierre Mugabo</h4>
                             <p class="text-gray-500 text-sm">Introduction Ceremony</p>
                         </div>
                     </div>
-                    <div class="text-yellow-400 mb-3">
+                    <div class="text-yellow-400 mb-4">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -205,18 +452,25 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <p class="text-gray-600 italic">"The traditional outfits we rented for our introduction ceremony were beautiful and fit perfectly. The decoration was elegant and respected our cultural traditions. Highly recommended!"</p>
+                    <!-- Replace with introduction ceremony image -->
+                    <div class="mt-4 h-40 rounded-lg overflow-hidden">
+                        <img src="/placeholder.svg?height=200&width=400" alt="Introduction Ceremony" class="w-full h-full object-cover">
+                    </div>
                 </div>
                 
                 <!-- Testimonial 3 -->
-                <div class="bg-gray-50 p-6 rounded-xl shadow-md">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                <div class="testimonial-card bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex items-center mb-6">
+                        <!-- Replace with client photo -->
+                        <div class="w-16 h-16 bg-gray-300 rounded-full mr-4 overflow-hidden">
+                            <img src="/placeholder.svg?height=100&width=100" alt="Eric Ndayishimiye" class="w-full h-full object-cover">
+                        </div>
                         <div>
-                            <h4 class="font-bold text-dark">Eric Ndayishimiye</h4>
+                            <h4 class="font-bold text-dark text-lg">Eric Ndayishimiye</h4>
                             <p class="text-gray-500 text-sm">Corporate Event</p>
                         </div>
                     </div>
-                    <div class="text-yellow-400 mb-3">
+                    <div class="text-yellow-400 mb-4">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -224,80 +478,279 @@
                         <i class="fas fa-star-half-alt"></i>
                     </div>
                     <p class="text-gray-600 italic">"We hired Urugo Ruhire for our company's annual gala dinner. The decoration was sophisticated and aligned perfectly with our brand. The service was excellent and very professional."</p>
+                    <!-- Replace with corporate event image -->
+                    <div class="mt-4 h-40 rounded-lg overflow-hidden">
+                        <img src="/placeholder.svg?height=200&width=400" alt="Corporate Event" class="w-full h-full object-cover">
+                    </div>
                 </div>
             </div>
             
-            <div class="text-center mt-8">
-                <a href="testimonials.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition">Read More Reviews</a>
+            <div class="text-center mt-10">
+                <a href="testimonials.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">
+                    Read More Reviews <i class="fas fa-comment-dots ml-2"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="py-16 bg-primary text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-6">Ready to Make Your Event Special?</h2>
+    <!-- Featured Packages with Images -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark mb-4">Our Popular Packages</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">Choose from our range of packages designed to suit different needs and budgets.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Bronze Package -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+                    <!-- Replace with bronze package image -->
+                    <div class="h-48 overflow-hidden">
+                        <img src="/placeholder.svg?height=300&width=500" alt="Bronze Package" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-dark mb-2">Bronze Package</h3>
+                            <div class="text-3xl font-bold text-primary mb-4">$500</div>
+                            <p class="text-gray-600">Basic decoration services for small events</p>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Basic venue decoration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Table settings for up to 50 guests</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Simple backdrop decoration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-times text-gray-400 mt-1 mr-3"></i>
+                                <span class="text-gray-400">Floral arrangements</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <a href="book.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition w-full">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Silver Package -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-lg border-2 border-primary relative transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-4 py-1 rounded-full text-sm font-bold">
+                        Most Popular
+                    </div>
+                    <!-- Replace with silver package image -->
+                    <div class="h-48 overflow-hidden">
+                        <img src="/placeholder.svg?height=300&width=500" alt="Silver Package" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-dark mb-2">Silver Package</h3>
+                            <div class="text-3xl font-bold text-primary mb-4">$1,200</div>
+                            <p class="text-gray-600">Complete decoration for medium-sized events</p>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Full venue decoration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Table settings for up to 100 guests</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Custom backdrop and photo area</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Basic floral arrangements</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <a href="book.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition w-full">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gold Package -->
+                <div class="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition">
+                    <!-- Replace with gold package image -->
+                    <div class="h-48 overflow-hidden">
+                        <img src="/placeholder.svg?height=300&width=500" alt="Gold Package" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-8">
+                        <div class="text-center mb-6">
+                            <h3 class="text-2xl font-bold text-dark mb-2">Gold Package</h3>
+                            <div class="text-3xl font-bold text-primary mb-4">$2,500</div>
+                            <p class="text-gray-600">Premium all-inclusive service for large events</p>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Luxury venue decoration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Table settings for up to 200 guests</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Premium backdrop and photo areas</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-primary mt-1 mr-3"></i>
+                                <span class="text-gray-600">Ceremonial clothing for couple</span>
+                            </li>
+                        </ul>
+                        <div class="text-center">
+                            <a href="book.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-3 px-8 rounded-full transition w-full">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action with Background Image -->
+    <section class="py-20 bg-primary text-white relative">
+        <!-- Replace with a beautiful decoration image -->
+        <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('/placeholder.svg?height=600&width=1600');"></div>
+        <div class="container mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Make Your Event Special?</h2>
             <p class="text-xl mb-8 max-w-2xl mx-auto">Contact us today to discuss your event needs or book our services.</p>
             <div class="flex flex-col md:flex-row justify-center gap-4">
-                <a href="book.html" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition">Book Now</a>
-                <a href="contact.html" class="bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-full transition">Contact Us</a>
+                <a href="book.html" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full transition transform hover:scale-105">Book Now</a>
+                <a href="contact.html" class="bg-secondary hover:bg-secondary/90 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">Contact Us</a>
+                <a href="catalog.html" class="bg-transparent hover:bg-white/10 text-white border-2 border-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105">View Catalog</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Feed -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-dark mb-4">Follow Us on Instagram</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">See more of our work and behind-the-scenes content on our Instagram page.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Replace these with Instagram images -->
+                <a href="#" class="block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Instagram Post 1" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Instagram Post 2" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Instagram Post 3" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="block overflow-hidden rounded-lg hover:opacity-90 transition">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Instagram Post 4" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="block overflow-hidden rounded-lg hover:opacity-90 transition hidden lg:block">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Instagram Post 5" class="w-full h-40 object-cover">
+                </a>
+                <a href="#" class="block overflow-hidden rounded-lg hover:opacity-90 transition hidden lg:block">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Instagram Post 6" class="w-full h-40 object-cover">
+                </a>
+            </div>
+            
+            <div class="text-center mt-8">
+                <a href="https://instagram.com" target="_blank" class="inline-flex items-center text-primary hover:text-primary/80 font-medium">
+                    <i class="fab fa-instagram mr-2 text-xl"></i> @urugoruhire
+                </a>
             </div>
         </div>
     </section>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/250788781389" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg z-50 transition">
+    <a href="https://wa.me/250788781389" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg z-50 transition transform hover:scale-110">
         <i class="fab fa-whatsapp text-3xl"></i>
     </a>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white pt-12 pb-6">
+    <!-- Footer with Image -->
+    <footer class="bg-dark text-white pt-16 pb-6">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <!-- Footer Top with Logo and Info -->
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div class="flex items-center mb-6 md:mb-0">
+                    <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-3">
+                        <span class="text-white font-bold text-xl">UR</span>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold">Urugo Ruhire Ltd</h3>
+                        <p class="text-gray-300">Making your special day unforgettable</p>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-gray-700 hover:bg-primary rounded-full flex items-center justify-center transition">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
                 <!-- Company Info -->
                 <div>
-                    <h3 class="text-xl font-bold mb-4">Urugo Ruhire Ltd</h3>
-                    <p class="text-gray-300 mb-4">Making your special day unforgettable with elegant decorations and stylish ceremonial wear.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    <h3 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">About Us</h3>
+                    <p class="text-gray-300 mb-4">Urugo Ruhire Ltd is a premier event decoration and ceremonial clothing company based in Kigali, Rwanda. We specialize in creating beautiful, elegant, and memorable experiences for all types of celebrations.</p>
+                    <!-- Replace with a small decoration image -->
+                    <div class="rounded-lg overflow-hidden">
+                        <img src="/placeholder.svg?height=200&width=300" alt="Our Work" class="w-full h-32 object-cover">
                     </div>
                 </div>
                 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <h3 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-300 hover:text-white">Home</a></li>
-                        <li><a href="about.html" class="text-gray-300 hover:text-white">About Us</a></li>
-                        <li><a href="services.html" class="text-gray-300 hover:text-white">Services</a></li>
-                        <li><a href="gallery.html" class="text-gray-300 hover:text-white">Gallery</a></li>
-                        <li><a href="catalog.html" class="text-gray-300 hover:text-white">Catalog</a></li>
-                        <li><a href="contact.html" class="text-gray-300 hover:text-white">Contact</a></li>
+                        <li><a href="index.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Home</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> About Us</a></li>
+                        <li><a href="services.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Services</a></li>
+                        <li><a href="gallery.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Gallery</a></li>
+                        <li><a href="catalog.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Catalog</a></li>
+                        <li><a href="testimonials.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Reviews</a></li>
+                        <li><a href="contact.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Contact</a></li>
+                        <li><a href="book.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-primary"></i> Book Now</a></li>
                     </ul>
                 </div>
                 
                 <!-- Services -->
                 <div>
-                    <h3 class="text-xl font-bold mb-4">Our Services</h3>
+                    <h3 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">Our Services</h3>
                     <ul class="space-y-2">
-                        <li><a href="services.html" class="text-gray-300 hover:text-white">Wedding Decoration</a></li>
-                        <li><a href="services.html" class="text-gray-300 hover:text-white">Introduction Ceremonies</a></li>
-                        <li><a href="services.html" class="text-gray-300 hover:text-white">Traditional Clothing</a></li>
-                        <li><a href="services.html" class="text-gray-300 hover:text-white">Party Decoration</a></li>
-                        <li><a href="services.html" class="text-gray-300 hover:text-white">Corporate Events</a></li>
+                        <li><a href="services.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-secondary"></i> Wedding Decoration</a></li>
+                        <li><a href="services.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-secondary"></i> Introduction Ceremonies</a></li>
+                        <li><a href="services.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-secondary"></i> Traditional Clothing</a></li>
+                        <li><a href="services.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-secondary"></i> Party Decoration</a></li>
+                        <li><a href="services.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-secondary"></i> Corporate Events</a></li>
+                        <li><a href="services.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-secondary"></i> Baptism Gowns</a></li>
+                        <li><a href="services.html" class="text-gray-300 hover:text-white flex items-center"><i class="fas fa-chevron-right text-xs mr-2 text-secondary"></i> Children's Wear</a></li>
                     </ul>
                 </div>
                 
                 <!-- Contact Info -->
                 <div>
-                    <h3 class="text-xl font-bold mb-4">Contact Us</h3>
-                    <ul class="space-y-2">
+                    <h3 class="text-xl font-bold mb-4 border-b border-gray-700 pb-2">Contact Us</h3>
+                    <ul class="space-y-4">
                         <li class="flex items-start">
                             <i class="fas fa-map-marker-alt mt-1 mr-3 text-secondary"></i>
-                            <span class="text-gray-300">Kigali, Rwanda</span>
+                            <span class="text-gray-300">KN 5 Ave, Kigali, Rwanda</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-phone-alt mt-1 mr-3 text-secondary"></i>
@@ -312,6 +765,9 @@
                             <span class="text-gray-300">Mon-Sat: 8:00 AM - 6:00 PM</span>
                         </li>
                     </ul>
+                    <a href="contact.html" class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-2 px-6 rounded-full transition mt-4">
+                        Get Directions
+                    </a>
                 </div>
             </div>
             
@@ -322,6 +778,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script>
         // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -329,6 +786,23 @@
         
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Hero Slider
+        const heroSwiper = new Swiper('.hero-swiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            },
         });
     </script>
 </body>
